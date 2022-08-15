@@ -1,177 +1,381 @@
+<h1 align="center">
+  <a href="https://ipfs.io"><img width="650px" src="https://ipfs.io/ipfs/QmQJ68PFMDdAsgCZvA1UVzzn18asVcf7HVvCDgpjiSCAse" alt="IPFS http client lib logo" /></a>
+</h1>
+
+<h3 align="center">The JavaScript HTTP RPC API client library for IPFS implementations.</h3>
+
 <p align="center">
-  <a href="https://js.ipfs.io" title="JS IPFS">
-    <img src="https://ipfs.io/ipfs/Qme6KJdKcp85TYbLxuLV7oQzMiLremD7HMoXLZEmgo6Rnh/js-ipfs-sticker.png" alt="IPFS in JavaScript logo" width="244" />
-  </a>
+  <a href="https://riot.im/app/#/room/#ipfs-dev:matrix.org"><img src="https://img.shields.io/badge/matrix-%23ipfs%3Amatrix.org-blue.svg?style=flat" /> </a>
+  <a href="http://webchat.freenode.net/?channels=%23ipfs"><img src="https://img.shields.io/badge/freenode-%23ipfs-blue.svg?style=flat" /></a>
+  <a href="https://discord.gg/24fmuwR"><img src="https://img.shields.io/discord/475789330380488707?color=blueviolet&label=discord&style=flat" /></a>
+  <a href="https://github.com/ipfs/team-mgmt/blob/master/MGMT_JS_CORE_DEV.md"><img src="https://img.shields.io/badge/team-mgmt-blue.svg?style=flat" /></a>
 </p>
 
-<h3 align="center">The JavaScript implementation of the IPFS protocol</h3>
-
 <p align="center">
-  <a href="https://github.com/ipfs/js-ipfs/tree/master/packages/interface-ipfs-core"><img src="https://img.shields.io/badge/interface--ipfs--core-API%20Docs-blue.svg"></a>
-  <a href="https://travis-ci.com/ipfs/js-ipfs?branch=master"><img src="https://badgen.net/travis/ipfs/js-ipfs?branch=master" /></a>
-  <a href="https://codecov.io/gh/ipfs/js-ipfs"><img src="https://badgen.net/codecov/c/github/ipfs/js-ipfs" /></a>
+  <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fipfs%2Fjs-ipfs?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fipfs%2Fjs-ipfs.svg?type=shield"/></a>
+  <a href="https://travis-ci.com/ipfs/js-ipfs"><img src="https://flat.badgen.net/travis/ipfs/js-ipfs" /></a>
+  <a href="https://codecov.io/gh/ipfs/js-ipfs-http-client"><img src="https://img.shields.io/codecov/c/github/ipfs/js-ipfs-http-client/master.svg?style=flat-square"></a>
+   <a href="https://bundlephobia.com/result?p=ipfs-http-client"><img src="https://flat.badgen.net/bundlephobia/minzip/ipfs-http-client"></a>
+  <br>
+  <a href="https://david-dm.org/ipfs/js-ipfs?path=packages/ipfs-http-client"><img src="https://david-dm.org/ipfs/js-ipfs.svg?style=flat-square&path=packages/ipfs-http-client" /></a>
+  <a href="https://github.com/feross/standard"><img src="https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square"></a>
+  <a href="https://github.com/RichardLitt/standard-readme"><img src="https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square" /></a>
+  <a href=""><img src="https://img.shields.io/badge/npm-%3E%3D3.0.0-orange.svg?style=flat-square" /></a>
+  <a href=""><img src="https://img.shields.io/badge/Node.js-%3E%3D10.0.0-orange.svg?style=flat-square" /></a>
+  <a href="https://www.npmjs.com/package/ipfs-http-client"><img src="https://img.shields.io/npm/dm/ipfs-http-client.svg" /></a>
+  <a href="https://www.jsdelivr.com/package/npm/ipfs-http-client"><img src="https://data.jsdelivr.com/v1/package/npm/ipfs-http-client/badge"/></a>
   <br>
 </p>
 
-## Getting started
-
-* Read the [docs](https://github.com/ipfs/js-ipfs/tree/master/docs)
-* Ensure CORS is [correctly configured](https://github.com/ipfs/js-ipfs/blob/master/docs/CORS.md) for use with the HTTP client
-* Look into the [examples](https://github.com/ipfs-examples/js-ipfs-examples/tree/master) to learn how to spawn an IPFS node in Node.js and in the Browser
-* Consult the [Core API docs](https://github.com/ipfs/js-ipfs/tree/master/docs/core-api) to see what you can do with an IPFS node
-* Head over to https://proto.school to take the [IPFS course](https://proto.school/course/ipfs) that covers core IPFS concepts and JS APIs
-* Check out https://docs.ipfs.io for [glossary](https://docs.ipfs.io/concepts/glossary), tips, how-tos and more
-* Need help? Please ask 'How do I?' questions on https://discuss.ipfs.io
-* Find out about chat channels, the IPFS newsletter, the IPFS blog, and more in the [IPFS community space](https://docs.ipfs.io/community/).
+> A client library for the IPFS HTTP RPC API (`/api/v0/*`), implemented in JavaScript. This client library implements the IPFS [Core API](https://github.com/ipfs/js-ipfs/tree/master/docs/core-api) enabling applications to change between an embedded js-ipfs node and any remote IPFS node without having to change the code. In addition, this client library implements a set of utility functions.
 
 ## Table of Contents <!-- omit in toc -->
 
-- [Getting started](#getting-started)
-  - [Install as a CLI user](#install-as-a-cli-user)
-  - [Install as an application developer](#install-as-an-application-developer)
-- [Documentation](#documentation)
-- [Structure](#structure)
-- [Packages](#packages)
-- [Want to hack on IPFS?](#want-to-hack-on-ipfs)
+- [Getting Started](#getting-started)
+  - [Install](#install)
+  - [Next Steps](#next-steps)
+- [Usage](#usage)
+    - [`create([options])`](#createoptions)
+    - [Parameters](#parameters)
+    - [Options](#options)
+    - [Returns](#returns)
+    - [Example](#example)
+  - [API](#api)
+  - [Additional Options](#additional-options)
+  - [Instance Utils](#instance-utils)
+  - [Static Types and Utils](#static-types-and-utils)
+    - [Glob source](#glob-source)
+      - [`globSource(path, pattern, [options])`](#globsourcepath-pattern-options)
+      - [Example](#example-1)
+    - [URL source](#url-source)
+      - [`urlSource(url)`](#urlsourceurl)
+      - [Example](#example-2)
+  - [Running the daemon with the right port](#running-the-daemon-with-the-right-port)
+  - [Importing the module and usage](#importing-the-module-and-usage)
+  - [In a web browser](#in-a-web-browser)
+  - [Custom Headers](#custom-headers)
+  - [Global Timeouts](#global-timeouts)
+- [Development](#development)
+  - [Testing](#testing)
+- [Contribute](#contribute)
+- [Historical context](#historical-context)
 - [License](#license)
 
-## Getting Started <!-- omit in toc -->
+## Getting Started
 
-### Install as a CLI user
+We've come a long way, but this project is still in Alpha, lots of development is happening, APIs might change, beware of 🐉..
 
-Installing `ipfs` globally will give you the `jsipfs` command which you can use to start a daemon running:
+### Install
 
-```console
-$ npm install -g ipfs
-$ jsipfs daemon
-Initializing IPFS daemon...
-js-ipfs version: x.x.x
-System version: x64/darwin
-Node.js version: x.x.x
-Swarm listening on /ip4/127.0
-.... more output
+This module uses node.js, and can be installed through npm:
+
+```bash
+npm install --save ipfs-http-client
 ```
 
-You can then add a file:
+Both the Current and Active LTS versions of Node.js are supported. Please see [nodejs.org](https://nodejs.org/) for what these currently are.
 
-```console
-$ jsipfs add ./hello-world.txt
-added QmXXY5ZxbtuYj6DnfApLiGstzPN7fvSyigrRee3hDWPCaf hello-world.txt
+### Next Steps
+
+* Read the [docs](https://github.com/ipfs/js-ipfs/tree/master/docs)
+* Look into the [examples](https://github.com/ipfs-examples/js-ipfs-examples) to learn how to spawn an IPFS node in Node.js and in the Browser
+* Consult the [Core API docs](https://github.com/ipfs/js-ipfs/tree/master/docs/core-api) to see what you can do with an IPFS node
+* Visit https://dweb-primer.ipfs.io to learn about IPFS and the concepts that underpin it
+* Head over to https://proto.school to take interactive tutorials that cover core IPFS APIs
+* Check out https://docs.ipfs.io for tips, how-tos and more
+* See https://blog.ipfs.io for news and more
+* Need help? Please ask 'How do I?' questions on https://discuss.ipfs.io
+
+## Usage
+
+#### `create([options])`
+
+> create an instance of the HTTP API client
+
+#### Parameters
+
+None
+
+#### Options
+
+`options` can be a `String`, a `URL` or a `Multiaddr` which will be interpreted as the address of the IPFS node we wish to use the API of.
+
+Alternatively it can be an object which may have the following keys:
+
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| url | `String` or `URL` or `Multiaddr` | `'http://localhost:5001/api/v0'` | A URL that resolves to a running instance of the IPFS [HTTP RPC API](https://docs.ipfs.io/reference/http/api/) |
+| protocol | `String` | `'http'` | The protocol to used (ignored if url is specified) |
+| host | `String` | `'localhost'` | The host to used (ignored if url is specified) |
+| port | `number` | `5001` | The port to used (ignored if url is specified) |
+| path | `String` | `'api/v0'` | The path to used (ignored if url is specified) |
+| agent | [http.Agent](https://nodejs.org/api/http.html#http_class_http_agent) | `http.Agent({ keepAlive: true, maxSockets: 6 })` | An `http.Agent` used to control client behaviour (node.js only) |
+
+#### Returns
+
+| Type | Description |
+| ---- | ----------- |
+| `Object` | An object that conforms to the [IPFS Core API](https://github.com/ipfs/js-ipfs/tree/master/docs/core-api) |
+
+#### Example
+
+```JavaScript
+import { create } from 'ipfs-http-client'
+
+// connect to the default API address http://localhost:5001
+const client = create()
+
+// connect to a different API
+const client = create({ url: "http://127.0.0.1:5002/api/v0" });
+
+// connect using a URL
+const client = create(new URL('http://127.0.0.1:5002'))
+
+// call Core API methods
+const { cid } = await client.add('Hello world!')
 ```
 
-### Install as an application developer
+### API
 
-If you do not need to run a command line daemon, use the `ipfs-core` package - it has all the features of `ipfs` but in a lighter package:
+[![IPFS Core API Compatible](https://cdn.rawgit.com/ipfs/interface-ipfs-core/master/img/badge.svg)](https://github.com/ipfs/js-ipfs/tree/master/packages/interface-ipfs-core)
 
-```console
-$ npm install ipfs-core
+> `js-ipfs-http-client` implements the [IPFS Core API](https://github.com/ipfs/js-ipfs/tree/master/docs/core-api) - please follow the previous link to see the methods available.
+
+### Additional Options
+
+All core API methods take _additional_ `options` specific to the HTTP API:
+
+* `headers` - An object or [Headers](https://developer.mozilla.org/en-US/docs/Web/API/Headers) instance that can be used to set custom HTTP headers. Note that this option can also be [configured globally](#custom-headers) via the constructor options.
+* `searchParams` - An object or [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) instance that can be used to add additional query parameters to the query string sent with each request.
+
+### Instance Utils
+
+- `ipfs.getEndpointConfig()`
+
+Call this on your client instance to return an object containing the `host`, `port`, `protocol` and `api-path`.
+
+### Static Types and Utils
+
+Aside from the default export, `ipfs-http-client` exports various types and utilities that are included in the bundle:
+
+- [`multiaddr`](https://www.npmjs.com/package/multiaddr)
+- [`multibase`](https://www.npmjs.com/package/multibase)
+- [`multicodec`](https://www.npmjs.com/package/multicodec)
+- [`multihash`](https://www.npmjs.com/package/multihashes)
+- [`CID`](https://www.npmjs.com/package/cids)
+- [`globSource`](https://github.com/ipfs/js-ipfs-utils/blob/master/src/files/glob-source.js) (not available in the browser)
+- [`urlSource`](https://github.com/ipfs/js-ipfs-utils/blob/master/src/files/url-source.js)
+
+These can be accessed like this, for example:
+
+```js
+const { CID } = require('ipfs-http-client')
+// ...or from an es-module:
+import { CID } from 'ipfs-http-client'
 ```
 
-Then start a node in your app:
+#### Glob source
+
+A utility to allow files on the file system to be easily added to IPFS.
+
+##### `globSource(path, pattern, [options])`
+
+- `path`: A path to a single file or directory to glob from
+- `pattern`: A pattern to match files under `path`
+- `options`: Optional options
+- `options.hidden`: Hidden/dot files (files or folders starting with a `.`, for example, `.git/`) are not included by default. To add them, use the option `{ hidden: true }`.
+
+Returns an async iterable that yields `{ path, content }` objects suitable for passing to `ipfs.add`.
+
+##### Example
+
+```js
+import { create, globSource } from 'ipfs'
+
+const ipfs = await create()
+
+for await (const file of ipfs.addAll(globSource('./docs', '**/*'))) {
+  console.log(file)
+}
+/*
+{
+  path: 'docs/assets/anchor.js',
+  cid: CID('QmVHxRocoWgUChLEvfEyDuuD6qJ4PhdDL2dTLcpUy3dSC2'),
+  size: 15347
+}
+{
+  path: 'docs/assets/bass-addons.css',
+  cid: CID('QmPiLWKd6yseMWDTgHegb8T7wVS7zWGYgyvfj7dGNt2viQ'),
+  size: 232
+}
+...
+*/
+```
+
+#### URL source
+
+A utility to allow content from the internet to be easily added to IPFS.
+
+##### `urlSource(url)`
+
+- `url`: A string URL or [`URL`](https://developer.mozilla.org/en-US/docs/Web/API/URL) instance to send HTTP GET request to
+
+Returns an async iterable that yields `{ path, content }` objects suitable for passing to `ipfs.add`.
+
+##### Example
+
+```js
+import { create, urlSource } from 'ipfs-http-client'
+const ipfs = create()
+
+const file = await ipfs.add(urlSource('https://ipfs.io/images/ipfs-logo.svg'))
+console.log(file)
+
+/*
+{
+  path: 'ipfs-logo.svg',
+  cid: CID('QmTqZhR6f7jzdhLgPArDPnsbZpvvgxzCZycXK7ywkLxSyU'),
+  size: 3243
+}
+*/
+```
+
+### Running the daemon with the right port
+
+To interact with the API, you need to have a local daemon running. It needs to be open on the right port. `5001` is the default, and is used in the examples below, but it can be set to whatever you need.
+
+```sh
+# Show the ipfs config API port to check it is correct
+> ipfs config Addresses.API
+/ip4/127.0.0.1/tcp/5001
+# Set it if it does not match the above output
+> ipfs config Addresses.API /ip4/127.0.0.1/tcp/5001
+# Restart the daemon after changing the config
+
+# Run the daemon
+> ipfs daemon
+```
+
+### Importing the module and usage
 
 ```javascript
-import * as IPFS from 'ipfs-core'
+import { create } from 'ipfs-http-client'
 
-const ipfs = await IPFS.create()
-const { cid } = await ipfs.add('Hello world')
-console.info(cid)
-// QmXXY5ZxbtuYj6DnfApLiGstzPN7fvSyigrRee3hDWPCaf
+// connect to ipfs daemon API server
+const ipfs = create('http://localhost:5001') // (the default in Node.js)
+
+// or connect with multiaddr
+const ipfs = create('/ip4/127.0.0.1/tcp/5001')
+
+// or using options
+const ipfs = create({ host: 'localhost', port: '5001', protocol: 'http' })
+
+// or specifying a specific API path
+const ipfs = create({ host: '1.1.1.1', port: '80', apiPath: '/ipfs/api/v0' })
 ```
 
-## Documentation
+### In a web browser
 
-* [Concepts](https://docs.ipfs.io/concepts/)
-* [Config](./docs/CONFIG.md)
-* [Core API](./docs/core-api)
-* [Examples](https://github.com/ipfs-examples/js-ipfs-examples/tree/master/examples)
-* [Development](./docs/DEVELOPMENT.md)
+**through Browserify**
 
-## Structure
+Same as in Node.js, you just have to [browserify](http://browserify.org) the code before serving it. See the browserify repo for how to do that.
 
-This project is broken into several modules, their purposes are:
+See the example in the [examples folder](https://github.com/ipfs-examples/js-ipfs-examples/tree/master/examples) to get a boilerplate.
 
-* [`/packages/interface-ipfs-core`](./packages/interface-ipfs-core) Tests to ensure adherence of an implementation to the spec
-* [`/packages/ipfs`](./packages/ipfs) An aggregator module that bundles the core implementation, the CLI, HTTP API server and daemon
-* [`/packages/ipfs-cli`](./packages/ipfs-cli) A CLI to the core implementation
-* [`/packages/ipfs-core`](./packages/ipfs-core) The core implementation
-* [`/packages/ipfs-core-types`](./packages/ipfs-core-types) Typescript definitions for the core API
-* [`/packages/ipfs-core-utils`](./packages/ipfs-core-utils) Helpers and utilities common to core and the HTTP RPC API client
-* [`/packages/ipfs-daemon`](./packages/ipfs-daemon) Run js-IPFS as a background daemon
-* [`/packages/ipfs-grpc-client`](./packages/ipfs-grpc-client) A gRPC client for js-IPFS
-* [`/packages/ipfs-grpc-protocol`](./packages/ipfs-grpc-protocol) Shared module between the gRPC client and server
-* [`/packages/ipfs-grpc-server`](./packages/ipfs-grpc-server) A gRPC-over-websockets server for js-IPFS
-* [`/packages/ipfs-http-client`](./packages/ipfs-http-client) A client for the RPC-over-HTTP API presented by both js-ipfs and go-ipfs
-* [`/packages/ipfs-http-server`](./packages/ipfs-http-server) JS implementation of the [Kubo RPC HTTP API](https://docs.ipfs.io/reference/kubo/rpc/)
-* [`/packages/ipfs-http-gateway`](./packages/ipfs-http-gateway) JS implementation of the [IPFS HTTP Gateway](https://docs.ipfs.io/concepts/ipfs-gateway/)
-* [`/packages/ipfs-http-response`](./packages/ipfs-http-response) Creates a HTTP response for a given IPFS Path
-* [`/packages/ipfs-message-port-client`](./packages/ipfs-message-port-client) A client for the RPC-over-message-port API presented by js-ipfs running in a shared worker
-* [`/packages/ipfs-message-port-protocol`](./packages/ipfs-message-port-protocol) Code shared by the message port client & server
-* [`/packages/ipfs-message-port-server`](./packages/ipfs-message-port-server) The server that receives requests from ipfs-message-port-client
+**through webpack**
 
-## Packages
+See the example in the [examples folder](https://github.com/ipfs-examples/js-ipfs-examples/tree/master/examples/http-client-bundle-webpack) to get an idea on how to use `js-ipfs-http-client` with webpack.
 
-List of the main packages that make up the IPFS ecosystem.
+**from CDN**
 
-| Package | Version | Deps | CI/Travis | Coverage | Lead Maintainer |
-| ---------|---------|---------|---------|---------|--------- |
-| **Files** |
-| [`ipfs-unixfs`](//github.com/ipfs/js-ipfs-unixfs) | [![npm](https://img.shields.io/npm/v/ipfs-unixfs.svg?maxAge=86400&style=flat-square)](//github.com/ipfs/js-ipfs-unixfs/releases) | [![Deps](https://david-dm.org/ipfs/js-ipfs-unixfs.svg?style=flat-square)](https://david-dm.org/ipfs/js-ipfs-unixfs) | [![Travis CI](https://flat.badgen.net/travis/ipfs/js-ipfs-unixfs/master)](https://travis-ci.com/ipfs/js-ipfs-unixfs) | [![codecov](https://codecov.io/gh/ipfs/js-ipfs-unixfs/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ipfs/js-ipfs-unixfs) | [Alex Potsides](mailto:alex.potsides@protocol.ai) |
-| **Repo** |
-| [`ipfs-repo`](//github.com/ipfs/js-ipfs-repo) | [![npm](https://img.shields.io/npm/v/ipfs-repo.svg?maxAge=86400&style=flat-square)](//github.com/ipfs/js-ipfs-repo/releases) | [![Deps](https://david-dm.org/ipfs/js-ipfs-repo.svg?style=flat-square)](https://david-dm.org/ipfs/js-ipfs-repo) | [![Travis CI](https://flat.badgen.net/travis/ipfs/js-ipfs-repo/master)](https://travis-ci.com/ipfs/js-ipfs-repo) | [![codecov](https://codecov.io/gh/ipfs/js-ipfs-repo/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ipfs/js-ipfs-repo) | [Alex Potsides](mailto:alex@achingbrain.net) |
-| [`ipfs-repo-migrations`](//github.com/ipfs/js-ipfs-repo-migrations) | [![npm](https://img.shields.io/npm/v/ipfs-repo-migrations.svg?maxAge=86400&style=flat-square)](//github.com/ipfs/js-ipfs-repo-migrations/releases) | [![Deps](https://david-dm.org/ipfs/js-ipfs-repo-migrations.svg?style=flat-square)](https://david-dm.org/ipfs/js-ipfs-repo-migrations) | [![Travis CI](https://flat.badgen.net/travis/ipfs/js-ipfs-repo-migrations/master)](https://travis-ci.com/ipfs/js-ipfs-repo-migrations) | [![codecov](https://codecov.io/gh/ipfs/js-ipfs-repo-migrations/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ipfs/js-ipfs-repo-migrations) | N/A |
-| **Exchange** |
-| [`ipfs-bitswap`](//github.com/ipfs/js-ipfs-bitswap) | [![npm](https://img.shields.io/npm/v/ipfs-bitswap.svg?maxAge=86400&style=flat-square)](//github.com/ipfs/js-ipfs-bitswap/releases) | [![Deps](https://david-dm.org/ipfs/js-ipfs-bitswap.svg?style=flat-square)](https://david-dm.org/ipfs/js-ipfs-bitswap) | [![Travis CI](https://flat.badgen.net/travis/ipfs/js-ipfs-bitswap/master)](https://travis-ci.com/ipfs/js-ipfs-bitswap) | [![codecov](https://codecov.io/gh/ipfs/js-ipfs-bitswap/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ipfs/js-ipfs-bitswap) | [Dirk McCormick](mailto:dirk@protocol.ai) |
-| **IPNS** |
-| [`ipns`](//github.com/ipfs/js-ipns) | [![npm](https://img.shields.io/npm/v/ipns.svg?maxAge=86400&style=flat-square)](//github.com/ipfs/js-ipns/releases) | [![Deps](https://david-dm.org/ipfs/js-ipns.svg?style=flat-square)](https://david-dm.org/ipfs/js-ipns) | [![Travis CI](https://flat.badgen.net/travis/ipfs/js-ipns/master)](https://travis-ci.com/ipfs/js-ipns) | [![codecov](https://codecov.io/gh/ipfs/js-ipns/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ipfs/js-ipns) | [Vasco Santos](mailto:vasco.santos@moxy.studio) |
-| **Generics/Utils** |
-| [`ipfs-utils`](//github.com/ipfs/js-ipfs) | [![npm](https://img.shields.io/npm/v/ipfs-utils.svg?maxAge=86400&style=flat-square)](//github.com/ipfs/js-ipfs/releases) | [![Deps](https://david-dm.org/ipfs/js-ipfs.svg?style=flat-square)](https://david-dm.org/ipfs/js-ipfs) | [![Travis CI](https://flat.badgen.net/travis/ipfs/js-ipfs/master)](https://travis-ci.com/ipfs/js-ipfs) | [![codecov](https://codecov.io/gh/ipfs/js-ipfs/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ipfs/js-ipfs) | [Hugo Dias](mailto:hugomrdias@gmail.com) |
-| [`ipfs-http-client`](//github.com/ipfs/js-ipfs) | [![npm](https://img.shields.io/npm/v/ipfs-http-client.svg?maxAge=86400&style=flat-square)](//github.com/ipfs/js-ipfs/releases) | [![Deps](https://david-dm.org/ipfs/js-ipfs.svg?style=flat-square)](https://david-dm.org/ipfs/js-ipfs) | [![Travis CI](https://flat.badgen.net/travis/ipfs/js-ipfs/master)](https://travis-ci.com/ipfs/js-ipfs) | [![codecov](https://codecov.io/gh/ipfs/js-ipfs/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ipfs/js-ipfs) | [Alex Potsides](mailto:alex@achingbrain.net) |
-| [`ipfs-http-response`](//github.com/ipfs/js-ipfs-http-response) | [![npm](https://img.shields.io/npm/v/ipfs-http-response.svg?maxAge=86400&style=flat-square)](//github.com/ipfs/js-ipfs-http-response/releases) | [![Deps](https://david-dm.org/ipfs/js-ipfs-http-response.svg?style=flat-square)](https://david-dm.org/ipfs/js-ipfs-http-response) | [![Travis CI](https://flat.badgen.net/travis/ipfs/js-ipfs-http-response/master)](https://travis-ci.com/ipfs/js-ipfs-http-response) | [![codecov](https://codecov.io/gh/ipfs/js-ipfs-http-response/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ipfs/js-ipfs-http-response) | [Vasco Santos](mailto:vasco.santos@moxy.studio) |
-| [`ipfsd-ctl`](//github.com/ipfs/js-ipfsd-ctl) | [![npm](https://img.shields.io/npm/v/ipfsd-ctl.svg?maxAge=86400&style=flat-square)](//github.com/ipfs/js-ipfsd-ctl/releases) | [![Deps](https://david-dm.org/ipfs/js-ipfsd-ctl.svg?style=flat-square)](https://david-dm.org/ipfs/js-ipfsd-ctl) | [![Travis CI](https://flat.badgen.net/travis/ipfs/js-ipfsd-ctl/master)](https://travis-ci.com/ipfs/js-ipfsd-ctl) | [![codecov](https://codecov.io/gh/ipfs/js-ipfsd-ctl/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ipfs/js-ipfsd-ctl) | [Hugo Dias](mailto:mail@hugodias.me) |
-| [`is-ipfs`](//github.com/ipfs/is-ipfs) | [![npm](https://img.shields.io/npm/v/is-ipfs.svg?maxAge=86400&style=flat-square)](//github.com/ipfs/is-ipfs/releases) | [![Deps](https://david-dm.org/ipfs/is-ipfs.svg?style=flat-square)](https://david-dm.org/ipfs/is-ipfs) | [![Travis CI](https://flat.badgen.net/travis/ipfs/is-ipfs/master)](https://travis-ci.com/ipfs/is-ipfs) | [![codecov](https://codecov.io/gh/ipfs/is-ipfs/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ipfs/is-ipfs) | [Marcin Rataj](mailto:lidel@lidel.org) |
-| [`aegir`](//github.com/ipfs/aegir) | [![npm](https://img.shields.io/npm/v/aegir.svg?maxAge=86400&style=flat-square)](//github.com/ipfs/aegir/releases) | [![Deps](https://david-dm.org/ipfs/aegir.svg?style=flat-square)](https://david-dm.org/ipfs/aegir) | [![Travis CI](https://flat.badgen.net/travis/ipfs/aegir/master)](https://travis-ci.com/ipfs/aegir) | [![codecov](https://codecov.io/gh/ipfs/aegir/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ipfs/aegir) | [Hugo Dias](mailto:hugomrdias@gmail.com) |
-| **libp2p** |
-| [`libp2p`](//github.com/libp2p/js-libp2p) | [![npm](https://img.shields.io/npm/v/libp2p.svg?maxAge=86400&style=flat-square)](//github.com/libp2p/js-libp2p/releases) | [![Deps](https://david-dm.org/libp2p/js-libp2p.svg?style=flat-square)](https://david-dm.org/libp2p/js-libp2p) | [![Travis CI](https://flat.badgen.net/travis/libp2p/js-libp2p/master)](https://travis-ci.com/libp2p/js-libp2p) | [![codecov](https://codecov.io/gh/libp2p/js-libp2p/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/libp2p/js-libp2p) | [Jacob Heun](mailto:jacobheun@gmail.com) |
-| [`peer-id`](//github.com/libp2p/js-peer-id) | [![npm](https://img.shields.io/npm/v/peer-id.svg?maxAge=86400&style=flat-square)](//github.com/libp2p/js-peer-id/releases) | [![Deps](https://david-dm.org/libp2p/js-peer-id.svg?style=flat-square)](https://david-dm.org/libp2p/js-peer-id) | [![Travis CI](https://flat.badgen.net/travis/libp2p/js-peer-id/master)](https://travis-ci.com/libp2p/js-peer-id) | [![codecov](https://codecov.io/gh/libp2p/js-peer-id/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/libp2p/js-peer-id) | [Vasco Santos](mailto:santos.vasco10@gmail.com) |
-| [`libp2p-crypto`](//github.com/libp2p/js-libp2p-crypto) | [![npm](https://img.shields.io/npm/v/libp2p-crypto.svg?maxAge=86400&style=flat-square)](//github.com/libp2p/js-libp2p-crypto/releases) | [![Deps](https://david-dm.org/libp2p/js-libp2p-crypto.svg?style=flat-square)](https://david-dm.org/libp2p/js-libp2p-crypto) | [![Travis CI](https://flat.badgen.net/travis/libp2p/js-libp2p-crypto/master)](https://travis-ci.com/libp2p/js-libp2p-crypto) | [![codecov](https://codecov.io/gh/libp2p/js-libp2p-crypto/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/libp2p/js-libp2p-crypto) | [Jacob Heun](mailto:jacobheun@gmail.com) |
-| [`libp2p-floodsub`](//github.com/libp2p/js-libp2p-floodsub) | [![npm](https://img.shields.io/npm/v/libp2p-floodsub.svg?maxAge=86400&style=flat-square)](//github.com/libp2p/js-libp2p-floodsub/releases) | [![Deps](https://david-dm.org/libp2p/js-libp2p-floodsub.svg?style=flat-square)](https://david-dm.org/libp2p/js-libp2p-floodsub) | [![Travis CI](https://flat.badgen.net/travis/libp2p/js-libp2p-floodsub/master)](https://travis-ci.com/libp2p/js-libp2p-floodsub) | [![codecov](https://codecov.io/gh/libp2p/js-libp2p-floodsub/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/libp2p/js-libp2p-floodsub) | [Vasco Santos](mailto:vasco.santos@moxy.studio) |
-| [`libp2p-gossipsub`](//github.com/ChainSafe/gossipsub-js) | [![npm](https://img.shields.io/npm/v/libp2p-gossipsub.svg?maxAge=86400&style=flat-square)](//github.com/ChainSafe/gossipsub-js/releases) | [![Deps](https://david-dm.org/ChainSafe/gossipsub-js.svg?style=flat-square)](https://david-dm.org/ChainSafe/gossipsub-js) | [![Travis CI](https://flat.badgen.net/travis/ChainSafe/gossipsub-js/master)](https://travis-ci.com/ChainSafe/gossipsub-js) | [![codecov](https://codecov.io/gh/ChainSafe/gossipsub-js/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ChainSafe/gossipsub-js) | [Cayman Nava](mailto:caymannava@gmail.com) |
-| [`libp2p-kad-dht`](//github.com/libp2p/js-libp2p-kad-dht) | [![npm](https://img.shields.io/npm/v/libp2p-kad-dht.svg?maxAge=86400&style=flat-square)](//github.com/libp2p/js-libp2p-kad-dht/releases) | [![Deps](https://david-dm.org/libp2p/js-libp2p-kad-dht.svg?style=flat-square)](https://david-dm.org/libp2p/js-libp2p-kad-dht) | [![Travis CI](https://flat.badgen.net/travis/libp2p/js-libp2p-kad-dht/master)](https://travis-ci.com/libp2p/js-libp2p-kad-dht) | [![codecov](https://codecov.io/gh/libp2p/js-libp2p-kad-dht/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/libp2p/js-libp2p-kad-dht) | [Vasco Santos](mailto:vasco.santos@moxy.studio) |
-| [`libp2p-mdns`](//github.com/libp2p/js-libp2p-mdns) | [![npm](https://img.shields.io/npm/v/libp2p-mdns.svg?maxAge=86400&style=flat-square)](//github.com/libp2p/js-libp2p-mdns/releases) | [![Deps](https://david-dm.org/libp2p/js-libp2p-mdns.svg?style=flat-square)](https://david-dm.org/libp2p/js-libp2p-mdns) | [![Travis CI](https://flat.badgen.net/travis/libp2p/js-libp2p-mdns/master)](https://travis-ci.com/libp2p/js-libp2p-mdns) | [![codecov](https://codecov.io/gh/libp2p/js-libp2p-mdns/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/libp2p/js-libp2p-mdns) | [Jacob Heun](mailto:jacobheun@gmail.com) |
-| [`libp2p-bootstrap`](//github.com/libp2p/js-libp2p-bootstrap) | [![npm](https://img.shields.io/npm/v/libp2p-bootstrap.svg?maxAge=86400&style=flat-square)](//github.com/libp2p/js-libp2p-bootstrap/releases) | [![Deps](https://david-dm.org/libp2p/js-libp2p-bootstrap.svg?style=flat-square)](https://david-dm.org/libp2p/js-libp2p-bootstrap) | [![Travis CI](https://flat.badgen.net/travis/libp2p/js-libp2p-bootstrap/master)](https://travis-ci.com/libp2p/js-libp2p-bootstrap) | [![codecov](https://codecov.io/gh/libp2p/js-libp2p-bootstrap/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/libp2p/js-libp2p-bootstrap) | [Vasco Santos](mailto:vasco.santos@moxy.studio) |
-| [`@chainsafe/libp2p-noise`](//github.com/ChainSafe/js-libp2p-noise) | [![npm](https://img.shields.io/npm/v/libp2p-noise.svg?maxAge=86400&style=flat-square)](//github.com/ChainSafe/js-libp2p-noise/releases) | [![Deps](https://david-dm.org/ChainSafe/js-libp2p-noise.svg?style=flat-square)](https://david-dm.org/ChainSafe/js-libp2p-noise) | [![Travis CI](https://flat.badgen.net/travis/ChainSafe/js-libp2p-noise/master)](https://travis-ci.com/ChainSafe/js-libp2p-noise) | [![codecov](https://codecov.io/gh/ChainSafe/js-libp2p-noise/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ChainSafe/js-libp2p-noise) | N/A |
-| [`libp2p-tcp`](//github.com/libp2p/js-libp2p-tcp) | [![npm](https://img.shields.io/npm/v/libp2p-tcp.svg?maxAge=86400&style=flat-square)](//github.com/libp2p/js-libp2p-tcp/releases) | [![Deps](https://david-dm.org/libp2p/js-libp2p-tcp.svg?style=flat-square)](https://david-dm.org/libp2p/js-libp2p-tcp) | [![Travis CI](https://flat.badgen.net/travis/libp2p/js-libp2p-tcp/master)](https://travis-ci.com/libp2p/js-libp2p-tcp) | [![codecov](https://codecov.io/gh/libp2p/js-libp2p-tcp/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/libp2p/js-libp2p-tcp) | [Jacob Heun](mailto:jacobheun@gmail.com) |
-| [`libp2p-webrtc-star`](//github.com/libp2p/js-libp2p-webrtc-star) | [![npm](https://img.shields.io/npm/v/libp2p-webrtc-star.svg?maxAge=86400&style=flat-square)](//github.com/libp2p/js-libp2p-webrtc-star/releases) | [![Deps](https://david-dm.org/libp2p/js-libp2p-webrtc-star.svg?style=flat-square)](https://david-dm.org/libp2p/js-libp2p-webrtc-star) | [![Travis CI](https://flat.badgen.net/travis/libp2p/js-libp2p-webrtc-star/master)](https://travis-ci.com/libp2p/js-libp2p-webrtc-star) | [![codecov](https://codecov.io/gh/libp2p/js-libp2p-webrtc-star/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/libp2p/js-libp2p-webrtc-star) | [Vasco Santos](mailto:vasco.santos@moxy.studio) |
-| [`libp2p-websockets`](//github.com/libp2p/js-libp2p-websockets) | [![npm](https://img.shields.io/npm/v/libp2p-websockets.svg?maxAge=86400&style=flat-square)](//github.com/libp2p/js-libp2p-websockets/releases) | [![Deps](https://david-dm.org/libp2p/js-libp2p-websockets.svg?style=flat-square)](https://david-dm.org/libp2p/js-libp2p-websockets) | [![Travis CI](https://flat.badgen.net/travis/libp2p/js-libp2p-websockets/master)](https://travis-ci.com/libp2p/js-libp2p-websockets) | [![codecov](https://codecov.io/gh/libp2p/js-libp2p-websockets/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/libp2p/js-libp2p-websockets) | [Jacob Heun](mailto:jacobheun@gmail.com) |
-| [`libp2p-mplex`](//github.com/libp2p/js-libp2p-mplex) | [![npm](https://img.shields.io/npm/v/libp2p-mplex.svg?maxAge=86400&style=flat-square)](//github.com/libp2p/js-libp2p-mplex/releases) | [![Deps](https://david-dm.org/libp2p/js-libp2p-mplex.svg?style=flat-square)](https://david-dm.org/libp2p/js-libp2p-mplex) | [![Travis CI](https://flat.badgen.net/travis/libp2p/js-libp2p-mplex/master)](https://travis-ci.com/libp2p/js-libp2p-mplex) | [![codecov](https://codecov.io/gh/libp2p/js-libp2p-mplex/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/libp2p/js-libp2p-mplex) | [Vasco Santos](mailto:vasco.santos@moxy.studio) |
-| [`libp2p-delegated-content-routing`](//github.com/libp2p/js-libp2p-delegated-content-routing) | [![npm](https://img.shields.io/npm/v/libp2p-delegated-content-routing.svg?maxAge=86400&style=flat-square)](//github.com/libp2p/js-libp2p-delegated-content-routing/releases) | [![Deps](https://david-dm.org/libp2p/js-libp2p-delegated-content-routing.svg?style=flat-square)](https://david-dm.org/libp2p/js-libp2p-delegated-content-routing) | [![Travis CI](https://flat.badgen.net/travis/libp2p/js-libp2p-delegated-content-routing/master)](https://travis-ci.com/libp2p/js-libp2p-delegated-content-routing) | [![codecov](https://codecov.io/gh/libp2p/js-libp2p-delegated-content-routing/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/libp2p/js-libp2p-delegated-content-routing) | [Jacob Heun](mailto:jacobheun@gmail.com) |
-| [`libp2p-delegated-peer-routing`](//github.com/libp2p/js-libp2p-delegated-peer-routing) | [![npm](https://img.shields.io/npm/v/libp2p-delegated-peer-routing.svg?maxAge=86400&style=flat-square)](//github.com/libp2p/js-libp2p-delegated-peer-routing/releases) | [![Deps](https://david-dm.org/libp2p/js-libp2p-delegated-peer-routing.svg?style=flat-square)](https://david-dm.org/libp2p/js-libp2p-delegated-peer-routing) | [![Travis CI](https://flat.badgen.net/travis/libp2p/js-libp2p-delegated-peer-routing/master)](https://travis-ci.com/libp2p/js-libp2p-delegated-peer-routing) | [![codecov](https://codecov.io/gh/libp2p/js-libp2p-delegated-peer-routing/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/libp2p/js-libp2p-delegated-peer-routing) | [Jacob Heun](mailto:jacobheun@gmail.com) |
-| **IPLD** |
-| [`@ipld/dag-pb`](//github.com/ipld/js-dag-pb) | [![npm](https://img.shields.io/npm/v/@ipld/dag-pb.svg?maxAge=86400&style=flat-square)](//github.com/ipld/js-dag-pb/releases) | [![Deps](https://david-dm.org/ipld/js-dag-pb.svg?style=flat-square)](https://david-dm.org/ipld/js-dag-pb) | [![Travis CI](https://flat.badgen.net/travis/ipld/js-dag-pb/master)](https://travis-ci.com/ipld/js-dag-pb) | [![codecov](https://codecov.io/gh/ipld/js-dag-pb/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ipld/js-dag-pb) | N/A |
-| [`@ipld/dag-cbor`](//github.com/ipld/js-dag-cbor) | [![npm](https://img.shields.io/npm/v/@ipld/dag-cbor.svg?maxAge=86400&style=flat-square)](//github.com/ipld/js-dag-cbor/releases) | [![Deps](https://david-dm.org/ipld/js-dag-cbor.svg?style=flat-square)](https://david-dm.org/ipld/js-dag-cbor) | [![Travis CI](https://flat.badgen.net/travis/ipld/js-dag-cbor/master)](https://travis-ci.com/ipld/js-dag-cbor) | [![codecov](https://codecov.io/gh/ipld/js-dag-cbor/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/ipld/js-dag-cbor) | N/A |
-| **Multiformats** |
-| [`multiformats`](//github.com/multiformats/js-multiformats) | [![npm](https://img.shields.io/npm/v/multiformats.svg?maxAge=86400&style=flat-square)](//github.com/multiformats/js-multiformats/releases) | [![Deps](https://david-dm.org/multiformats/js-multiformats.svg?style=flat-square)](https://david-dm.org/multiformats/js-multiformats) | [![Travis CI](https://flat.badgen.net/travis/multiformats/js-multiformats/master)](https://travis-ci.com/multiformats/js-multiformats) | [![codecov](https://codecov.io/gh/multiformats/js-multiformats/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/multiformats/js-multiformats) | N/A |
-| [`mafmt`](//github.com/multiformats/js-mafmt) | [![npm](https://img.shields.io/npm/v/mafmt.svg?maxAge=86400&style=flat-square)](//github.com/multiformats/js-mafmt/releases) | [![Deps](https://david-dm.org/multiformats/js-mafmt.svg?style=flat-square)](https://david-dm.org/multiformats/js-mafmt) | [![Travis CI](https://flat.badgen.net/travis/multiformats/js-mafmt/master)](https://travis-ci.com/multiformats/js-mafmt) | [![codecov](https://codecov.io/gh/multiformats/js-mafmt/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/multiformats/js-mafmt) | [Vasco Santos](mailto:vasco.santos@moxy.studio) |
-| [`multiaddr`](//github.com/multiformats/js-multiaddr) | [![npm](https://img.shields.io/npm/v/multiaddr.svg?maxAge=86400&style=flat-square)](//github.com/multiformats/js-multiaddr/releases) | [![Deps](https://david-dm.org/multiformats/js-multiaddr.svg?style=flat-square)](https://david-dm.org/multiformats/js-multiaddr) | [![Travis CI](https://flat.badgen.net/travis/multiformats/js-multiaddr/master)](https://travis-ci.com/multiformats/js-multiaddr) | [![codecov](https://codecov.io/gh/multiformats/js-multiaddr/branch/master/graph/badge.svg?style=flat-square)](https://codecov.io/gh/multiformats/js-multiaddr) | [Jacob Heun](mailto:jacobheun@gmail.com) |
+Instead of a local installation (and browserification) you may request a remote copy of IPFS API from [jsDelivr](https://www.jsdelivr.com/package/npm/ipfs).
 
-> This table is generated using the module [`package-table`](https://www.npmjs.com/package/package-table) with `package-table --data=package-list.json`.
+To always request the latest version, use one of the following examples:
 
-## Want to hack on IPFS?
+```html
+<!-- loading the minified version using jsDelivr -->
+<script src="https://cdn.jsdelivr.net/npm/ipfs-http-client/dist/index.min.js"></script>
+```
+
+For maximum security you may also decide to:
+
+* reference a specific version of IPFS API (to prevent unexpected breaking changes when a newer latest version is published)
+* [generate a SRI hash](https://www.srihash.org/) of that version and use it to ensure integrity. Learn more also at the [jsdelivr website](https://www.jsdelivr.com/using-sri-with-dynamic-files)
+* set the [CORS settings attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/CORS_settings_attributes) to make anonymous requests to CDN
+
+Example:
+
+```html
+<script
+  src="https://www.jsdelivr.com/package/npm/ipfs-http-client"
+  integrity="sha384-5bXRcW9kyxxnSMbOoHzraqa7Z0PQWIao+cgeg327zit1hz5LZCEbIMx/LWKPReuB"
+  crossorigin="anonymous"
+></script>
+```
+
+CDN-based IPFS API provides the `IpfsHttpClient` constructor as a method of the global `window` object. Example:
+
+```js
+const ipfs = window.IpfsHttpClient({ host: 'localhost', port: 5001 })
+```
+
+If you omit the host and port, the client will parse `window.host`, and use this information. This also works, and can be useful if you want to write apps that can be run from multiple different gateways:
+
+```js
+const ipfs = window.IpfsHttpClient()
+```
+
+### Custom Headers
+
+If you wish to send custom headers with each request made by this library, for example, the Authorization header. You can use the config to do so:
+
+```js
+const ipfs = create({
+  host: 'localhost',
+  port: 5001,
+  protocol: 'http',
+  headers: {
+    authorization: 'Bearer ' + TOKEN
+  }
+})
+```
+
+### Global Timeouts
+
+To set a global timeout for _all_ requests pass a value for the `timeout` option:
+
+```js
+// Timeout after 10 seconds
+const ipfs = create({ timeout: 10000 })
+// Timeout after 2 minutes
+const ipfs = create({ timeout: '2m' })
+// see https://www.npmjs.com/package/parse-duration for valid string values
+```
+
+## Development
+
+### Testing
+
+We run tests by executing `npm test` in a terminal window. This will run both Node.js and Browser tests, both in Chrome and PhantomJS. To ensure that the module conforms with the [`interface-ipfs-core`](https://github.com/ipfs/js-ipfs/tree/master/packages/interface-ipfs-core) spec, we run the batch of tests provided by the interface module, which can be found [here](https://github.com/ipfs/js-ipfs/tree/master/packages/interface-ipfs-core/src).
+
+## Contribute
+
+The js-ipfs-http-client is a work in progress. As such, there's a few things you can do right now to help out:
+
+- **[Check out the existing issues](https://github.com/ipfs/js-ipfs-http-client/issues)**!
+- **Perform code reviews**. More eyes will help a) speed the project along b) ensure quality and c) reduce possible future bugs.
+- **Add tests**. There can never be enough tests. Note that interface tests exist inside [`interface-ipfs-core`](https://github.com/ipfs/js-ipfs/tree/master/packages/interface-ipfs-core/src).
+
+**Want to hack on IPFS?**
 
 [![](https://cdn.rawgit.com/jbenet/contribute-ipfs-gif/master/img/contribute.gif)](https://github.com/ipfs/community/blob/master/CONTRIBUTING.md)
 
-The IPFS implementation in JavaScript needs your help! There are a few things you can do right now to help out:
+## Historical context
 
-Read the [Code of Conduct](https://github.com/ipfs/community/blob/master/code-of-conduct.md) and [JavaScript Contributing Guidelines](https://github.com/ipfs/community/blob/master/CONTRIBUTING_JS.md).
-
-- **Check out existing issues** The [issue list](https://github.com/ipfs/js-ipfs/issues) has many that are marked as ['help wanted'](https://github.com/ipfs/js-ipfs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3A%22help+wanted%22) or ['difficulty:easy'](https://github.com/ipfs/js-ipfs/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Adifficulty%3Aeasy) which make great starting points for development, many of which can be tackled with no prior IPFS knowledge
-- **Look at the [IPFS Roadmap](https://github.com/ipfs/roadmap)** This are the high priority items being worked on right now
-- **Perform code reviews** More eyes will help
-  a. speed the project along
-  b. ensure quality, and
-  c. reduce possible future bugs.
-- **Add tests**. There can never be enough tests.
+This module started as a direct mapping from the go-ipfs cli to a JavaScript implementation, although this was useful and familiar to a lot of developers that were coming to IPFS for the first time, it also created some confusion on how to operate the core of IPFS and have access to the full capacity of the protocol. After much consideration, we decided to create `interface-ipfs-core` with the goal of standardizing the interface of a core implementation of IPFS, and keep the utility functions the IPFS community learned to use and love, such as reading files from disk and storing them directly to IPFS.
 
 ## License
 
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fipfs%2Fjs-ipfs.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fipfs%2Fjs-ipfs?ref=badge_large)
+[MIT](LICENSE)
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fipfs%2Fjs-ipfs-http-client.svg?type=large)](https://app.fossa.io/projects/git%2Bhttps%3A%2F%2Fgithub.com%2Fipfs%2Fjs-ipfs-http-client?ref=badge_large)
